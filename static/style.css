@@ -1,0 +1,264 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #0a0a1f;
+    color: #fff;
+    font-family: 'Space Mono', monospace;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+#space-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: radial-gradient(circle at center, #1a1a3d 0%, #0a0a1f 70%);
+}
+
+.container {
+    background: rgba(20, 20, 50, 0.8);
+    border-radius: 20px;
+    padding: 40px;
+    width: 90%;
+    max-width: 900px;
+    margin: 80px auto 40px; /* Adjusted for creator banner */
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    animation: orbitIn 1.5s ease-out;
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes orbitIn {
+    from { opacity: 0; transform: scale(0.9) rotate(5deg); }
+    to { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+.title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3.5em;
+    text-align: center;
+    color: #00ffcc;
+    text-shadow: 0 0 15px #00ffcc, 0 0 25px #ff00ff;
+    animation: pulsarGlow 2s infinite alternate;
+}
+
+@keyframes pulsarGlow {
+    from { text-shadow: 0 0 10px #00ffcc; }
+    to { text-shadow: 0 0 20px #00ffcc, 0 0 30px #ff00ff; }
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 1.3em;
+    color: #a0a0ff;
+    margin-bottom: 20px;
+    animation: fadeIn 2s ease-in;
+}
+
+/* Creator Banner */
+.creator-banner {
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 2;
+}
+
+.creator-text {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8em;
+    color: #ff00ff; /* Neon magenta for prominence */
+    text-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffcc;
+    background: rgba(0, 255, 204, 0.1);
+    padding: 10px 25px;
+    border-radius: 50px;
+    border: 2px dashed #00ffcc;
+    display: inline-block;
+    animation: orbitCreator 8s infinite linear, glowCreator 1.5s infinite alternate;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.creator-text:hover {
+    transform: scale(1.05) rotate(3deg);
+    box-shadow: 0 0 30px #ff00ff;
+}
+
+@keyframes orbitCreator {
+    0% { transform: rotate(0deg) translateX(10px) rotate(0deg); }
+    100% { transform: rotate(360deg) translateX(10px) rotate(-360deg); }
+}
+
+@keyframes glowCreator {
+    from { text-shadow: 0 0 10px #ff00ff; }
+    to { text-shadow: 0 0 20px #ff00ff, 0 0 30px #00ffcc; }
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.label {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.4em;
+    color: #00ffcc;
+    text-shadow: 0 0 5px #00ffcc;
+    transition: color 0.3s;
+}
+
+.label:hover {
+    color: #ff00ff;
+}
+
+.radio-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.radio-label {
+    font-size: 1em;
+    padding: 12px 25px;
+    background: rgba(0, 255, 204, 0.1);
+    border: 2px solid #00ffcc;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.radio-label::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 0, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.5s, height 0.5s;
+}
+
+.radio-label:hover::after {
+    width: 200%;
+    height: 200%;
+}
+
+.radio-label:hover {
+    background: rgba(0, 255, 204, 0.3);
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px #00ffcc;
+}
+
+input[type="radio"]:checked + .radio-label {
+    background: #00ffcc;
+    color: #0a0a1f;
+    border-color: #ff00ff;
+    box-shadow: 0 0 20px #ff00ff;
+}
+
+.textarea {
+    width: 100%;
+    height: 150px;
+    background: rgba(10, 10, 31, 0.7);
+    border: 2px solid #00ffcc;
+    border-radius: 15px;
+    padding: 20px;
+    color: #fff;
+    font-family: 'Space Mono', monospace;
+    resize: vertical;
+    transition: all 0.4s;
+    box-shadow: inset 0 0 10px rgba(0, 255, 204, 0.2);
+}
+
+.textarea:focus {
+    border-color: #ff00ff;
+    box-shadow: 0 0 20px #ff00ff, inset 0 0 15px rgba(255, 0, 255, 0.3);
+    outline: none;
+}
+
+.submit-btn {
+    padding: 15px 30px;
+    background: linear-gradient(90deg, #00ffcc, #ff00ff);
+    border: none;
+    border-radius: 30px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.3em;
+    color: #0a0a1f;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.submit-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: all 0.5s;
+}
+
+.submit-btn:hover::before {
+    left: 100%;
+}
+
+.submit-btn:hover {
+    transform: scale(1.1) rotate(2deg);
+    box-shadow: 0 0 25px #ff00ff, 0 0 35px #00ffcc;
+}
+
+.result-container {
+    margin-top: 40px;
+    animation: fadeIn 1s ease-in;
+}
+
+.result-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8em;
+    color: #00ffcc;
+    text-shadow: 0 0 10px #00ffcc;
+}
+
+.result {
+    background: rgba(20, 20, 50, 0.9);
+    padding: 25px;
+    border-radius: 15px;
+    border: 1px solid #00ffcc;
+    font-family: 'Space Mono', monospace;
+    white-space: pre-wrap;
+    box-shadow: 0 0 15px rgba(0, 255, 204, 0.2);
+    animation: floatUp 1s ease-out;
+}
+
+@keyframes floatUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}

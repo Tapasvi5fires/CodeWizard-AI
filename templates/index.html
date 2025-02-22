@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeWizard AI - Cosmic Coding</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Space+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+    <canvas id="space-bg"></canvas>
+    <div class="container">
+        <h1 class="title">CodeWizard AI</h1>
+        <p class="subtitle">Unleash Cosmic Code Magic</p>
+        <div class="creator-banner">
+            <span class="creator-text">Created by Tapasvi Panchagnula</span>
+        </div>
+        <form method="post" class="form">
+            <div class="input-group">
+                <label class="label">Select Your Spell:</label>
+                <div class="radio-buttons">
+                    <input type="radio" name="action" value="generate" id="generate" required>
+                    <label for="generate" class="radio-label">Generate</label>
+                    <input type="radio" name="action" value="hint" id="hint">
+                    <label for="hint" class="radio-label">Hint</label>
+                    <input type="radio" name="action" value="correct" id="correct">
+                    <label for="correct" class="radio-label">Correct & Run</label>
+                    <input type="radio" name="action" value="explain" id="explain">
+                    <label for="explain" class="radio-label">Explain</label>
+                    <input type="radio" name="action" value="lang" id="lang">
+                    <label for="lang" class="radio-label">Set Language</label>
+                </div>
+            </div>
+            <div class="input-group">
+                <label class="label">Input Your Cosmic Query:</label>
+                <textarea name="prompt" id="prompt" class="textarea" placeholder="Enter your prompt or code... (e.g., 'sum of two numbers')"></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Cast Cosmic Spell</button>
+        </form>
+        <div class="result-container">
+            <h2 class="result-title">Cosmic Output:</h2>
+            <pre class="result">{{ result }}</pre>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
