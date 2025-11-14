@@ -1,298 +1,243 @@
-An AI-powered Coding Assistant that generates, explains, corrects, and executes code using StarCoder.
+# 🚀 CodeWizard AI  
+### **Your Personal AI-Powered Coding Assistant**  
+*Created by **Tapasvi Panchagnula***  
 
-🚀 CodeWizard AI
-Your Personal AI-Powered Coding Assistant
+![Python](https://img.shields.io/badge/Python-3.x-blue)
+![Flask](https://img.shields.io/badge/Flask-Backend-black)
+![HuggingFace](https://img.shields.io/badge/StarCoder-AI%20Model-yellow)
+![JavaScript](https://img.shields.io/badge/JavaScript-Execution-orange)
+![Status](https://img.shields.io/badge/Status-Active-success)
 
-Created by Tapasvi Panchagnula
+---
 
-🧠 Overview
+# 📌 Table of Contents
+- [About the Project](#about-the-project)
+- [Features](#features)
+- [Technology Stack](#technology-stack)
+- [Architecture Overview](#architecture-overview)
+- [Project Structure](#project-structure)
+- [Installation & Setup](#installation--setup)
+- [Usage (Web App)](#usage-web-app)
+- [Usage (CLI Version)](#usage-cli-version)
+- [How It Works](#how-it-works)
+- [API & Internal Logic](#api--internal-logic)
+- [Future Enhancements](#future-enhancements)
+- [Contributing](#contributing)
+- [License](#license)
 
-CodeWizard AI is an intelligent coding assistant built using Flask, HuggingFace StarCoder, and Python execution engine.
-It helps developers with:
+---
 
-✔ Code generation
-✔ Code explanation
-✔ Code correction + execution
-✔ Syntax linting
-✔ Hints for logic
-✔ Multi-language support (Python & JavaScript)
+# 🎯 About the Project  
+**CodeWizard AI** is an end‑to‑end coding assistant that helps developers generate, explain, correct, and execute code using **HuggingFace StarCoder**, Flask, and Python.  
+It works as both:  
+- 🌐 A **Web Application**, and  
+- 💻 A **CLI Terminal Application**
 
-This project includes both:
+This project showcases full‑stack AI integration, backend automation, prompt engineering, syntax correction, and safe code execution.
 
-A Web App (Flask)
+---
 
-A CLI Tool (terminal-based)
+# ⭐ Features
 
-🎯 Key Features
-✅ 1. AI Code Generation
+### ✔ Code Generation  
+Generate new code from natural language using StarCoder.
 
-Uses HuggingFace StarCoder to generate high-quality code based on natural-language prompts.
+### ✔ Code Explanation  
+Explain any provided code in simple human terms.
 
-✅ 2. AI Code Explanation
+### ✔ Code Correction  
+Fix syntax & indentation issues using:  
+- Regex corrections  
+- PEP8 linting (pycodestyle)  
+- Rule-based cleanup
 
-Explain any code in simple, easy-to-understand language.
+### ✔ Code Execution  
+Safely execute Python or JavaScript using a sandboxed `subprocess`.
 
-✅ 3. Automatic Code Correction
+### ✔ Hint Generation  
+Get small hints for improvements or debugging.
 
-Detects errors using:
+### ✔ Language Switching  
+Switch between **Python** and **JavaScript** modes.
 
-Regular expressions
+---
 
-pycodestyle (PEP8 linter)
+# 🔧 Technology Stack
 
-Custom rule-based fixes
+| Component | Technology |
+|----------|------------|
+| Backend  | Flask |
+| AI Model | HuggingFace StarCoder |
+| Linting | pycodestyle |
+| Code Execution | subprocess + temp files |
+| Frontend | HTML (Jinja2 Template) |
+| CLI Tool | Python + termcolor |
 
-Then rewrites corrected code.
+---
 
-✅ 4. Code Execution Sandbox
+# 🏗 Architecture Overview
 
-Executes user code safely using a temporary file & subprocess.
+```
+┌──────────────────────┐
+│      User Input      │
+└───────────┬──────────┘
+            ▼
+     ┌───────────────┐
+     │   Flask App   │
+     └──────┬────────┘
+            ▼
+┌──────────────────────────────┐
+│     CodeWizard Engine        │
+│ generate | explain | correct │
+│ lint | run | hint | execute  │
+└───────────────┬──────────────┘
+                ▼
+       ┌────────────────┐
+       │ HuggingFace AI │
+       └────────────────┘
+```
 
-Supports:
+---
 
-Python
+# 📁 Project Structure
 
-JavaScript
-
-✅ 5. Error Feedback
-
-If execution fails, the assistant returns:
-
-Corrected code
-
-Explanation of corrections
-
-Output / errors from execution
-
-✅ 6. Language Switching
-
-Users can switch between:
-
-"python"
-
-"javascript"
-
-📂 Project Structure
+```
 CodeWizard-AI/
 │
-├── app.py                 # Flask web server
-├── main.py                # CLI tool (terminal version)
-├── code_wizard.py         # Core AI engine - code generation, correction, execution
-├── requirements.txt       # Dependencies
+├── app.py                 # Flask Web Server
+├── main.py                # CLI Application
+├── code_wizard.py         # AI Logic (StarCoder + Execution + Linting)
 ├── templates/
-│   └── index.html         # Web UI
-├── static/                # CSS/JS assets (currently minimal)
-├── security/              # Placeholder directory
-├── solutionstotest.txt    # Sample test prompts
+│   └── index.html         # Frontend Template
+├── static/                # CSS/JS (future use)
+├── solutionstotest.txt    # Test prompts
+├── requirements.txt
 └── README.md              # Documentation
+```
 
-🧠 How the System Works (Architecture)
-User Input
-   │
-   ▼
-Flask App (app.py)
-   │
-   ├── generate  →  StarCoder API → AI-generated code
-   ├── hint      →  AI suggestion
-   ├── correct   →  fix code → run code → return output
-   ├── explain   →  explain code using StarCoder
-   └── lang      →  change language mode
-   │
-   ▼
-CodeWizard Class (code_wizard.py)
-   │
-   ├── HuggingFace StarCoder API
-   ├── Regex correction system
-   ├── PEP8 linting (pycodestyle)
-   ├── Subprocess execution engine
-   └── Output formatter
-   │
-   ▼
-Web UI (index.html)
+---
 
-🧩 Detailed Explanation — Each Component
-📌 code_wizard.py — Core Intelligence Engine
+# ⚙ Installation & Setup
 
-This is the most important file.
-
-Functions inside:
-🔹 generate_code(prompt)
-
-Sends your prompt to HuggingFace StarCoder via REST API.
-Returns generated code.
-
-🔹 provide_hint(prompt)
-
-Returns a short suggestion/hint using StarCoder.
-
-🔹 explain_code(code)
-
-Explains the logic behind given code.
-
-🔹 correct_and_run(code)
-
-Fixes code step-by-step:
-
-Detect syntax errors
-
-Run pycodestyle to check for issues
-
-Apply corrections (indentation, missing colons, spacing)
-
-Save code to a temp file
-
-Execute using subprocess
-
-Returns:
-
-Fixed code
-
-Explanation of corrections
-
-Execution result
-
-🔹 Language Execution Logic
-
-If language == "python" → run via Python
-If language == "javascript" → run via Node.js
-
-📌 app.py — Flask Web Application
-
-Handles all web routes:
-
-Route	Method	Description
-/	GET/POST	Main UI
-action = generate	POST	Generate code
-action = correct	POST	Correct + execute code
-action = hint	POST	Provide hint
-action = explain	POST	Explain code
-action = lang	POST	Switch language
-
-Uses Jinja2 to pass results into index.html.
-
-📌 main.py — CLI Version
-
-A terminal version of CodeWizard.
-
-Features include:
-
-Text-based interface
-
-Code generation
-
-Explanation
-
-Error correction
-
-Code execution
-
-Color coded output using termcolor
-
-Useful for Linux/terminal lovers.
-
-📌 templates/index.html — Web Interface
-
-Simple clean UI:
-
-Input text area
-
-Buttons:
-
-Generate Code
-
-Explain
-
-Get Hint
-
-Correct Code
-
-Change Language
-
-Outputs AI results below form.
-
-🛠️ Installation
-1️⃣ Clone the Repository
+### 1️⃣ Clone the Repository
+```bash
 git clone https://github.com/Tapasvi5fires/CodeWizard-AI.git
 cd CodeWizard-AI
+```
 
-2️⃣ Create a Virtual Environment
+### 2️⃣ Create Virtual Environment
+```bash
 python -m venv venv
-source venv/bin/activate  # macOS/Linux
-venv\Scripts\activate     # Windows
+source venv/bin/activate  # Linux/macOS
+venv\Scriptsctivate     # Windows
+```
 
-3️⃣ Install Requirements
+### 3️⃣ Install Dependencies  
+```bash
 pip install -r requirements.txt
+```
 
-▶️ Running the Web App (Flask)
+---
+
+# ▶ Usage (Web App)
+
+Run:
+```bash
 python app.py
+```
 
-
-Open in browser:
-
+Then open in browser:
+```
 http://127.0.0.1:5000/
+```
 
-💻 Running the CLI Version
+---
+
+# 💻 Usage (CLI Version)
+
+```bash
 python main.py
+```
 
+You will see options for:
+- Generate Code  
+- Correct & Run  
+- Explain Code  
+- Get Hints  
+- Switch Language  
 
-You will see a terminal UI similar to:
+---
 
-Welcome to CodeWizard AI
-1. Generate Code
-2. Correct & Run Code
-3. Explain Code
-4. Change Language
-...
+# 🧠 How It Works
 
-🔧 Environment Variables
+### 🔹 Code Generation  
+StarCoder receives your prompt → returns generated code.
 
-You must add your HuggingFace API token inside code_wizard.py or via environment variable:
+### 🔹 Code Correction  
+`correct_and_run()` performs:  
+- Regex-based cleanup  
+- PEP8 lint check  
+- Auto-fixes  
+- Test execution  
+- Returns corrected code + explanation
 
-HF_API_TOKEN = "<your token>"
+### 🔹 Execution  
+Python → run via `python`  
+JS → run via `node`
 
-🧪 Example Usage
-Generate Code
+Executed in a **temp sandbox file**.
 
-Prompt:
+---
 
-write a python function to check prime number
+# 🔌 API & Internal Logic Breakdown
 
+### 📌 `generate_code(prompt)`
+Uses StarCoder endpoint to generate code.
 
-Output:
+### 📌 `provide_hint(prompt)`
+Returns micro‑suggestions for debugging.
 
-def is_prime(n):
-    if n <= 1:
-        return False
-    for i in range(2, int(n**0.5)+1):
-        if n % i == 0:
-            return False
-    return True
+### 📌 `explain_code(code)`
+Explains code step-by-step.
 
-🛡️ Security Notes
+### 📌 `correct_and_run(code)`
+1. Detects syntax issues  
+2. Lints using pycodestyle  
+3. Fixes structure  
+4. Executes safely  
+5. Returns:  
+   - corrected code  
+   - explanation  
+   - runtime output  
 
-Executes code in a limited sandbox, but still be careful with untrusted user input.
+---
 
-Uses temp files and timeout limits to prevent abuse.
+# 🚀 Future Enhancements
 
-🐳 Docker Support (Optional)
+- Add **Dark UI Theme**
+- Support **C++**, **Java**, **Go**
+- Add **Docker deployment**
+- Add **Authentication**
+- Real-time collaborative editing
+- Syntax highlighting in UI
+- GPU-powered StarCoder inference
 
-If you want, I can create a Dockerfile for you as well.
-Just tell me: "Generate Dockerfile for CodeWizard AI"
+---
 
-🤝 Contributing
+# 🤝 Contributing
 
-Pull requests are welcome!
+1. Fork this repository  
+2. Create a new branch  
+3. Commit changes  
+4. Open a Pull Request  
 
-📜 License
+---
 
-MIT License (You can change this if needed.)
+# 📜 License  
+MIT License
 
-🎥 Demo Video
+---
 
-Aicodewizard.mp4 is included in repository.
-You can upload it to GitHub Releases or embed it as a GIF.
-
-⭐ Author
-
-Tapasvi Panchagnula
-AI Developer • Backend Engineer • ML Enthusiast
+# 👤 Author  
+**Tapasvi Panchagnula**  
+AI/ML Engineer • Backend Developer • Python Specialist  
